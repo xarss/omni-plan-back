@@ -1,62 +1,63 @@
 {
-    "name": "form_structure",
-    "description": "Will contain the structure for a form to be completed in order to create a plan on the user subject",
-    "strict": true,
-    "schema": {
-      "type": "object",
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "The title of the plan being created."
-        },
-        "success": {
-            "type": "boolean",
-            "description": "If the request can be completed. If the request has nothing to do with something to be planned, this should be false"
-        },
-        "inputs": {
-          "type": "array",
-          "description": "List of input components used in the plan.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "inputType": {
-                "type": "string",
-                "enum": [
-                  "checkbox",
-                  "text",
-                  "textarea",
-                  "date"
-                ],
-                "description": "The type of input. Checkbox for yes no questions, Text for short answers, textarea for lists or descriptions and date for dates"
-              },
-              "question": {
-                "type": "string",
-                "description": "The question to be made in that component"
-              },
-              "mandatory": {
-                "type": "boolean",
-                "description": "If the input must be answered in order to finish the plan"
-              },
-              "id": {
-                "type": "string",
-                "description": "A unique identifier that should be this object's inputType a number"
-              }
-            },
-            "required": [
-              "inputType",
-              "question",
-              "mandatory",
-              "id"
-            ],
-            "additionalProperties": false
-          }
-        }
+  "name": "form_structure",
+  "description": "Will contain the structure for a form to be completed in order to create a plan on the user subject",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "The title of the plan being created."
       },
-      "required": [
-        "title",
-        "success",
-        "inputs"
-      ],
-      "additionalProperties": false
-    }
+      "success": {
+        "type": "boolean",
+        "description": "If the request can be completed. If the request has nothing to do with something to be planned, this should be false"
+      },
+      "inputs": {
+        "type": "array",
+        "description": "List of input components used in the plan.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "checkbox",
+                "text",
+                "textarea",
+                "date",
+                "select"
+              ],
+              "description": "The type of input. Checkbox for yes no questions, text for short answers, textarea for lists or descriptions and date for dates, select for multiple choises"
+            },
+            "question": {
+              "type": "string",
+              "description": "The question to be made that will be answered in the input"
+            },
+            "suggestion": {
+              "type": "string",
+              "description": "If the input type is select, should be all the options divided by commas, if the input type is text or textarea should be the placeholder, if the input type is date or checkbox, should be an empty string."
+            },
+            "id": {
+              "type": "string",
+              "description": "A unique identifier that should be this object's type and a number"
+            }
+          },
+          "required": [
+            "type",
+            "question",
+            "id",
+            "suggestion"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "title",
+      "success",
+      "inputs"
+    ],
+    "additionalProperties": false
   }
+}

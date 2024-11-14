@@ -1,5 +1,4 @@
 import "jsr:@std/dotenv/load";
-import formStructure from "../schemas/formStructure.json" with { type: "json" };
 
 const KEY = Deno.env.get("GPT_API_KEY");
 
@@ -36,7 +35,7 @@ export async function askGPT(prompt: string): Promise<string> {
   return content;
 }
 
-export async function generateFormStructure(prompt: string): Promise<string> {
+export async function generateFormStructure(prompt: string, formStructure: object): Promise<string> {
   if (KEY === undefined) {
     throw new Error("Failed to reach external API");
   }
@@ -64,8 +63,6 @@ export async function generateFormStructure(prompt: string): Promise<string> {
 
   // Parse the response from the API
   const responseData = await response.json();
-
-  console.log(responseData);
 
   // Access the message content and return it
   const content = responseData.choices[0]?.message?.content;
